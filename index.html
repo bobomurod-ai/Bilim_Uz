@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="uz" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilim_Uz — Interaktiv Ta'lim Platformasi</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <!-- Maxsus stillar -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="h-full bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col font-sans antialiased select-none">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- ==================== DESKTOP SIDEBAR ==================== -->
+        <aside class="hidden lg:flex flex-col w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shrink-0 select-none z-30">
+            <!-- Logo -->
+            <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center gap-3">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-violet-600 text-white flex items-center justify-center text-xl shadow-lg shadow-blue-500/30">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-heading">Bilim_Uz</h1>
+                    <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Ta'lim platformasi</p>
+                </div>
+            </div>
+
+            <!-- Menyu ro'yxati -->
+            <nav class="flex-1 px-4 py-5 space-y-1.5 overflow-y-auto">
+                <button data-nav-target="bosh_sahifa" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm transition text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+                    <i class="fa-solid fa-house text-lg w-5 text-center text-blue-500"></i>
+                    <span>Bosh sahifa</span>
+                </button>
+
+                <button data-nav-target="fanlar" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm transition text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+                    <i class="fa-solid fa-book-bookmark text-lg w-5 text-center text-emerald-500"></i>
+                    <span>Fanlar</span>
+                </button>
+
+                <button data-nav-target="kundalik_topshiriqlar" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm transition text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+                    <i class="fa-solid fa-calendar-check text-lg w-5 text-center text-amber-500"></i>
+                    <span>Kundalik topshiriqlar</span>
+                </button>
+
+                <button data-nav-target="testlar" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm transition text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+                    <i class="fa-solid fa-clipboard-question text-lg w-5 text-center text-indigo-500"></i>
+                    <span>Testlar fanlar bo'yicha</span>
+                </button>
+
+                <button data-nav-target="masalalar" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm transition text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+                    <i class="fa-solid fa-lightbulb text-lg w-5 text-center text-rose-500"></i>
+                    <span>Masalalar</span>
+                </button>
+
+                <button data-nav-target="natijalar" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm transition text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+                    <i class="fa-solid fa-chart-pie text-lg w-5 text-center text-teal-500"></i>
+                    <span>Natijalar</span>
+                </button>
+
+                <button data-nav-target="reyting" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm transition text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+                    <i class="fa-solid fa-trophy text-lg w-5 text-center text-yellow-500"></i>
+                    <span>Reyting</span>
+                </button>
+
+                <button data-nav-target="profil" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm transition text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60">
+                    <i class="fa-solid fa-user-graduate text-lg w-5 text-center text-purple-500"></i>
+                    <span>Profil</span>
+                </button>
+            </nav>
+
+            <!-- Pastki mini profil -->
+            <div class="p-4 m-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 flex items-center gap-3 cursor-pointer" onclick="BilimApp.navigateTo('profil')">
+                <div id="headerAvatarDisplay" class="w-11 h-11 rounded-xl bg-blue-100 dark:bg-blue-900/60 text-2xl flex items-center justify-center shrink-0">
+                    👨‍🎓
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h4 id="dashGreetingName" class="text-sm font-bold text-slate-900 dark:text-white truncate">Azizbek</h4>
+                    <p id="headerXpCount" class="text-xs font-semibold text-blue-600 dark:text-blue-400">1250 XP</p>
+                </div>
+                <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
+            </div>
+        </aside>
+
+        <!-- ==================== MOBIL SIDEBAR ==================== -->
+        <div id="mobileSidebarOverlay" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-40 hidden lg:hidden" onclick="BilimApp.closeMobileSidebar()"></div>
+        <aside id="mobileSidebar" class="fixed inset-y-0 left-0 w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col z-50 transform -translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
+            <div class="p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center text-base">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <span class="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Bilim_Uz</span>
+                </div>
+                <button onclick="BilimApp.closeMobileSidebar()" class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <nav class="flex-1 px-4 py-4 space-y-1.5 overflow-y-auto">
+                <button data-nav-target="bosh_sahifa" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-300">
+                    <i class="fa-solid fa-house w-5 text-center text-blue-500"></i>
+                    <span>Bosh sahifa</span>
+                </button>
+                <button data-nav-target="fanlar" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-300">
+                    <i class="fa-solid fa-book-bookmark w-5 text-center text-emerald-500"></i>
+                    <span>Fanlar</span>
+                </button>
+                <button data-nav-target="kundalik_topshiriqlar" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-300">
+                    <i class="fa-solid fa-calendar-check w-5 text-center text-amber-500"></i>
+                    <span>Kundalik topshiriqlar</span>
+                </button>
+                <button data-nav-target="testlar" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-300">
+                    <i class="fa-solid fa-clipboard-question w-5 text-center text-indigo-500"></i>
+                    <span>Testlar fanlar bo'yicha</span>
+                </button>
+                <button data-nav-target="masalalar" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-300">
+                    <i class="fa-solid fa-lightbulb w-5 text-center text-rose-500"></i>
+                    <span>Masalalar</span>
+                </button>
+                <button data-nav-target="natijalar" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-300">
+                    <i class="fa-solid fa-chart-pie w-5 text-center text-teal-500"></i>
+                    <span>Natijalar</span>
+                </button>
+                <button data-nav-target="reyting" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-300">
+                    <i class="fa-solid fa-trophy w-5 text-center text-yellow-500"></i>
+                    <span>Reyting</span>
+                </button>
+                <button data-nav-target="profil" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl font-semibold text-sm text-slate-600 dark:text-slate-300">
+                    <i class="fa-solid fa-user-graduate w-5 text-center text-purple-500"></i>
+                    <span>Profil</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- ==================== ASOSIY MAYDON (NAVBAR + CONTENT) ==================== -->
+        <div class="flex-1 flex flex-col h-screen overflow-hidden">
+            
+            <!-- Yuqori Navbar -->
+            <header class="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 sm:px-8 flex items-center justify-between shrink-0 z-20">
+                <div class="flex items-center gap-3">
+                    <button onclick="BilimApp.toggleMobileSidebar()" class="lg:hidden w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-center">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <span class="hidden sm:inline-block text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full">
+                        🇺🇿 O'zbekiston yoshlari uchun interaktiv ta'lim
+                    </span>
+                </div>
+
+                <!-- Foydalanuvchi ko'rsatkichlari & sozlamalar -->
+                <div class="flex items-center gap-2 sm:gap-4">
+                    <!-- Kunlik streak -->
+                    <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800 text-orange-600 dark:text-orange-400 font-bold text-xs" title="Kunlik faollik zanjiri">
+                        <i class="fa-solid fa-fire text-orange-500"></i>
+                        <span id="headerStreakCount">4</span> <span class="hidden sm:inline">kun</span>
+                    </div>
+
+                    <!-- Tangalar -->
+                    <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-yellow-50 dark:bg-yellow-950/40 border border-yellow-200 dark:border-yellow-800 text-yellow-700 dark:text-yellow-400 font-bold text-xs" title="To'plangan tangalar">
+                        <i class="fa-solid fa-coins text-yellow-500"></i>
+                        <span id="headerCoinsCount">140</span>
+                    </div>
+
+                    <!-- Ovoz yoqish/o'chirish -->
+                    <button onclick="BilimApp.toggleSound()" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 flex items-center justify-center transition" title="Ovozni yoqish / o'chirish">
+                        <i id="soundToggleIcon" class="fa-solid fa-volume-high text-slate-600 dark:text-slate-300 text-sm"></i>
+                    </button>
+
+                    <!-- Dark mode toggle -->
+                    <button onclick="BilimApp.toggleTheme()" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 flex items-center justify-center transition" title="Mavzuni almashtirish">
+                        <i id="themeToggleIcon" class="fa-solid fa-moon text-slate-600 text-sm"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- ==================== ASOSIY SAHIFALAR SAHNAsi ==================== -->
+            <main class="flex-1 overflow-y-auto p-4 sm:p-8 bg-slate-50 dark:bg-slate-950">
+                
+                <!-- 1. BOSH SAHIFA -->
+                <section id="view_bosh_sahifa" class="page-view space-y-8 max-w-7xl mx-auto">
+                    <!-- Banner -->
+                    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 text-white p-6 sm:p-10 shadow-xl">
+                        <div class="relative z-10 max-w-2xl space-y-4">
+                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-bold uppercase tracking-wider">
+                                <i class="fa-solid fa-sparkles text-amber-300"></i> Bilim — kuchdir!
+                            </span>
+                            <h2 class="text-2xl sm:text-4xl font-extrabold font-heading leading-tight">
+                                Kelajagingizni bugundan boshlab quring!
+                            </h2>
+                            <p class="text-blue-100 text-sm sm:text-base leading-relaxed">
+                                Matematika, Ingliz tili, Ona tili va Tarix fanlaridan mukammal bilimlarni interaktiv darslar, qiziqarli testlar va mantiqiy masalalar orqali o'rganing.
+                            </p>
+                            <div class="flex flex-wrap gap-3 pt-2">
+                                <button onclick="BilimApp.navigateTo('testlar')" class="px-6 py-3 rounded-xl bg-white text-blue-700 font-bold text-sm shadow-md hover:bg-blue-50 transition flex items-center gap-2">
+                                    <i class="fa-solid fa-play text-blue-600"></i> Test yechishni boshlash
+                                </button>
+                                <button onclick="BilimApp.navigateTo('masalalar')" class="px-6 py-3 rounded-xl bg-white/20 backdrop-blur-md hover:bg-white/30 text-white font-bold text-sm transition flex items-center gap-2">
+                                    <i class="fa-solid fa-brain"></i> Masalalar yechish
+                                </button>
+                            </div>
+                        </div>
+                        <div class="absolute -right-10 -bottom-10 opacity-15 text-white text-[240px] pointer-events-none">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                    </div>
+
+                    <!-- Motivatsion Iqtibos -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-quote-left"></i>
+                        </div>
+                        <div>
+                            <p id="dashMotivationalQuote" class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-100 italic">"Ilm o'rganish igna bilan quduq qazish kabidir."</p>
+                            <p id="dashMotivationalAuthor" class="text-xs text-slate-400 font-medium mt-1">— Xalq maqoli</p>
+                        </div>
+                    </div>
+
+                    <!-- Tezkor Statistika Kartalari -->
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-400 font-medium">To'plangan XP</span>
+                                <h4 id="dashStatXP" class="text-xl font-bold text-slate-900 dark:text-white">1250</h4>
+                            </div>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-orange-100 dark:bg-orange-950 text-orange-600 dark:text-orange-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-fire"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-400 font-medium">Faollik zanjiri</span>
+                                <h4 id="dashStatStreak" class="text-xl font-bold text-slate-900 dark:text-white">4 kun</h4>
+                            </div>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-check-double"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-400 font-medium">Topshirilgan testlar</span>
+                                <h4 id="dashStatTests" class="text-xl font-bold text-slate-900 dark:text-white">12 ta</h4>
+                            </div>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-ranking-star"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-400 font-medium">Reytingdagi o'rin</span>
+                                <h4 id="dashStatRank" class="text-xl font-bold text-slate-900 dark:text-white">#6</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fanlar bo'yicha kartalar sarlavhasi -->
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white">O'quv fanlari</h3>
+                                <p class="text-xs text-slate-500">Mavzularni tanlang va bilimingizni boyiting</p>
+                            </div>
+                            <button onclick="BilimApp.navigateTo('fanlar')" class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1">
+                                Barcha fanlar <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div id="dashSubjectsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <!-- Fanlar dinamik tarzda app.js orqali joylanadi -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. FANLAR -->
+                <section id="view_fanlar" class="page-view hidden space-y-6 max-w-7xl mx-auto">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900 dark:text-white font-heading">Fanlar va Darsliklar</h2>
+                            <p class="text-sm text-slate-500">Matematika, Ingliz tili, Ona tili va Tarix fanlari bo'yicha konspektlar va qoidalar</p>
+                        </div>
+                    </div>
+
+                    <div id="subjectsListContainer" class="space-y-6">
+                        <!-- Har bir fanning darslari joylanadi -->
+                    </div>
+                </section>
+
+                <!-- 3. KUNDALIK TOPSHIRIQLAR -->
+                <section id="view_kundalik_topshiriqlar" class="page-view hidden space-y-6 max-w-5xl mx-auto">
+                    <div class="p-6 rounded-3xl bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-lg flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                        <div class="space-y-2">
+                            <span class="text-xs font-bold uppercase tracking-wider bg-white/20 px-3 py-1 rounded-full">Bugungi reja</span>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold font-heading">Kundalik vazifalar va Mukofotlar</h2>
+                            <p class="text-amber-100 text-sm max-w-xl">Har kuni topshiriqlarni yakunlab, qo'shimcha tajriba ballari (XP) va tangalarga ega bo'ling!</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 text-center min-w-[160px]">
+                            <span class="text-xs font-bold text-amber-200">Bugungi natija:</span>
+                            <div id="dailyTasksProgressText" class="text-lg font-extrabold mt-1">0 / 5 bajarildi</div>
+                            <div class="w-full bg-black/20 h-2.5 rounded-full mt-2 overflow-hidden">
+                                <div id="dailyTasksProgressBar" class="bg-white h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="dailyTasksContainer" class="space-y-3">
+                        <!-- Kundalik vazifalar ro'yxati -->
+                    </div>
+                </section>
+
+                <!-- 4. TESTLAR FANLAR BO'YICHA -->
+                <section id="view_testlar" class="page-view hidden space-y-6 max-w-5xl mx-auto">
+                    
+                    <!-- 4.1. Test tanlash ko'rinishi -->
+                    <div id="testSelectionView" class="space-y-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900 dark:text-white font-heading">Fanlar bo'yicha Testlar</h2>
+                            <p class="text-sm text-slate-500">Qaysi fandan o'z bilimingizni sinab ko'rmoqchisiz? Fanni tanlang:</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <!-- Matematika -->
+                            <div onclick="BilimTests.startQuiz('matematika')" class="card-hover p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer group flex flex-col justify-between">
+                                <div>
+                                    <div class="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                                        <i class="fa-solid fa-calculator"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Matematika Testlari</h3>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Arifmetika, tenglamalar, foizlar va geometriya bo'yicha 8 ta qiziqarli test savollari.</p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between text-xs font-bold text-blue-600">
+                                    <span>8 ta savol &bull; 30s har bir savolga</span>
+                                    <span class="flex items-center gap-1">Boshlash <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+                                </div>
+                            </div>
+
+                            <!-- Ingliz tili -->
+                            <div onclick="BilimTests.startQuiz('ingliz_tili')" class="card-hover p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer group flex flex-col justify-between">
+                                <div>
+                                    <div class="w-14 h-14 rounded-2xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                                        <i class="fa-solid fa-language"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Ingliz tili Testlari</h3>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Grammar tenses, irregular verbs, idioms va lug'at boyligi bo'yicha testlar.</p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between text-xs font-bold text-emerald-600">
+                                    <span>8 ta savol &bull; 30s har bir savolga</span>
+                                    <span class="flex items-center gap-1">Boshlash <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+                                </div>
+                            </div>
+
+                            <!-- Ona tili -->
+                            <div onclick="BilimTests.startQuiz('ona_tili')" class="card-hover p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer group flex flex-col justify-between">
+                                <div>
+                                    <div class="w-14 h-14 rounded-2xl bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                                        <i class="fa-solid fa-book-open"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Ona tili Testlari</h3>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Fonetika, tutuq belgisi, so'z turkumlari va tinish belgilari me'yorlari.</p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between text-xs font-bold text-amber-600">
+                                    <span>8 ta savol &bull; 30s har bir savolga</span>
+                                    <span class="flex items-center gap-1">Boshlash <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+                                </div>
+                            </div>
+
+                            <!-- Tarix -->
+                            <div onclick="BilimTests.startQuiz('tarix')" class="card-hover p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer group flex flex-col justify-between">
+                                <div>
+                                    <div class="w-14 h-14 rounded-2xl bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-400 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                                        <i class="fa-solid fa-landmark"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Tarix Testlari</h3>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Amir Temur, qadimgi Baqtriya, buyuk allomalar va mustaqillik davri voqealari.</p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between text-xs font-bold text-rose-600">
+                                    <span>8 ta savol &bull; 30s har bir savolga</span>
+                                    <span class="flex items-center gap-1">Boshlash <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4.2. Jonli Test Jarayoni -->
+                    <div id="testRunnerView" class="hidden space-y-6">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 uppercase">Sinov fani:</span>
+                                <h3 id="testRunnerSubjectName" class="text-xl font-bold text-slate-900 dark:text-white">Matematika</h3>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                                    <i class="fa-regular fa-clock text-slate-400"></i>
+                                    <span id="quizTimer" class="font-mono font-bold text-blue-600">30s</span>
+                                </div>
+                                <button onclick="BilimTests.backToSelection()" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950 transition">
+                                    Chiqish
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between text-xs text-slate-400 font-semibold">
+                                <span id="quizProgressText">Savol: 1 / 8</span>
+                                <span>100% to'g'rilik maqsadi</span>
+                            </div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
+                                <div id="quizProgressBar" class="bg-blue-600 h-full rounded-full transition-all duration-300" style="width: 12%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Savol matni kartasi -->
+                        <div class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+                            <h3 id="quizQuestionText" class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-relaxed">
+                                Savol matni bu yerda yuklanadi...
+                            </h3>
+
+                            <!-- Variantlar -->
+                            <div id="quizOptionsContainer" class="space-y-3">
+                                <!-- A, B, C, D variantlar -->
+                            </div>
+
+                            <!-- Izoh qutisi -->
+                            <div id="quizExplanationBox" class="hidden"></div>
+
+                            <!-- Keyingi savolga o'tish tugmasi -->
+                            <div class="flex justify-end pt-4">
+                                <button id="quizNextBtn" onclick="BilimTests.nextQuestion()" class="hidden px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md shadow-blue-500/20 transition flex items-center gap-2">
+                                    <span>Keyingi savol</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4.3. Test Natijalari Ekrani -->
+                    <div id="testResultView" class="hidden space-y-6">
+                        <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg text-center max-w-xl mx-auto space-y-6">
+                            <div class="w-20 h-20 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 text-3xl flex items-center justify-center mx-auto shadow-inner">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+
+                            <div>
+                                <span id="resultSubjectTitle" class="text-xs font-bold uppercase tracking-wider text-slate-400">Matematika</span>
+                                <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">Test yakunlandi!</h3>
+                                <p id="resultFeedbackMessage" class="text-sm text-slate-500 mt-2">Ajoyib natija qayd etdingiz!</p>
+                            </div>
+
+                            <!-- Katta foiz ko'rsatkichi -->
+                            <div class="py-4">
+                                <div id="resultScorePercent" class="text-5xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-heading">
+                                    88%
+                                </div>
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Umumiy ko'rsatkich</span>
+                            </div>
+
+                            <!-- Ko'rsatkichlar paneli -->
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
+                                <div class="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
+                                    <span class="text-[11px] text-emerald-700 dark:text-emerald-400 font-semibold">To'g'ri:</span>
+                                    <h5 id="resultCorrectCount" class="text-lg font-bold text-emerald-800 dark:text-emerald-300">7</h5>
+                                </div>
+                                <div class="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800">
+                                    <span class="text-[11px] text-rose-700 dark:text-rose-400 font-semibold">Xato:</span>
+                                    <h5 id="resultWrongCount" class="text-lg font-bold text-rose-800 dark:text-rose-300">1</h5>
+                                </div>
+                                <div class="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800">
+                                    <span class="text-[11px] text-blue-700 dark:text-blue-400 font-semibold">Mukofot XP:</span>
+                                    <h5 id="resultEarnedXP" class="text-lg font-bold text-blue-800 dark:text-blue-300">+105 XP</h5>
+                                </div>
+                                <div class="p-3 rounded-xl bg-yellow-50 dark:bg-yellow-950/40 border border-yellow-200 dark:border-yellow-800">
+                                    <span class="text-[11px] text-yellow-700 dark:text-yellow-400 font-semibold">Tanga:</span>
+                                    <h5 id="resultEarnedCoins" class="text-lg font-bold text-yellow-800 dark:text-yellow-300">+21</h5>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                                <button onclick="BilimTests.backToSelection()" class="flex-1 py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition">
+                                    Boshqa test topshirish
+                                </button>
+                                <button onclick="BilimApp.navigateTo('natijalar')" class="flex-1 py-3 px-4 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 font-bold text-sm transition">
+                                    Natijalar tahlili
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Xatolar va savollar tahlili ro'yxati -->
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                <i class="fa-solid fa-list-check text-blue-500"></i> Savollarning batafsil tahlili:
+                            </h4>
+                            <div id="quizReviewContainer" class="space-y-3">
+                                <!-- Tahlillar -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. MASALALAR -->
+                <section id="view_masalalar" class="page-view hidden space-y-6 max-w-6xl mx-auto">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900 dark:text-white font-heading">Qiziqarli Masalalar va Boshqotirmalar</h2>
+                            <p class="text-sm text-slate-500">Mantiqiy tafakkur, matematik hisob-kitob va zukkolikni talab qiluvchi jumboqlar</p>
+                        </div>
+                    </div>
+
+                    <!-- Filtrlash tugmalari -->
+                    <div id="problemsFilterContainer" class="flex flex-wrap gap-2">
+                        <!-- Filter tablari -->
+                    </div>
+
+                    <!-- Masalalar gridi -->
+                    <div id="problemsCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <!-- Masalalar kartochkalari -->
+                    </div>
+                </section>
+
+                <!-- 6. NATIJALAR -->
+                <section id="view_natijalar" class="page-view hidden space-y-6 max-w-6xl mx-auto">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white font-heading">Natijalar va O'sish Dinamikasi</h2>
+                        <p class="text-sm text-slate-500">O'zlashtirish darajasi va avvalgi sinovlar tarixi</p>
+                    </div>
+
+                    <!-- 3 ta statistika bloki -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <span class="text-xs text-slate-400 font-bold uppercase">Jami topshirilgan testlar</span>
+                            <h3 id="resultsTotalTests" class="text-3xl font-extrabold text-blue-600 mt-2">12 ta</h3>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <span class="text-xs text-slate-400 font-bold uppercase">O'rtacha aniqlik foizi</span>
+                            <h3 id="resultsAvgPercent" class="text-3xl font-extrabold text-emerald-600 mt-2">85%</h3>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <span class="text-xs text-slate-400 font-bold uppercase">Jami yechilgan savollar</span>
+                            <h3 id="resultsTotalQuestions" class="text-3xl font-extrabold text-purple-600 mt-2">96 ta</h3>
+                        </div>
+                    </div>
+
+                    <!-- Chart.js Grafigi -->
+                    <div class="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-base font-bold text-slate-900 dark:text-white">Fanlar kesimidagi bilim darajasi</h4>
+                            <span class="text-xs text-slate-400">Foiz hisobida</span>
+                        </div>
+                        <div class="h-64 relative">
+                            <canvas id="resultsAnalyticsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Sinovlar tarixi jadvali -->
+                    <div class="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white">Yaqinda topshirilgan testlar tarixi</h4>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full text-left">
+                                <thead class="bg-slate-50 dark:bg-slate-800/60 text-slate-500 text-xs font-bold uppercase">
+                                    <tr>
+                                        <th class="p-4">Fan nomi</th>
+                                        <th class="p-4">Sana va vaqt</th>
+                                        <th class="p-4">To'g'ri javoblar</th>
+                                        <th class="p-4">Natija</th>
+                                        <th class="p-4">Mukofot</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="resultsHistoryTableBody" class="divide-y divide-slate-100 dark:divide-slate-800">
+                                    <!-- Dinamik satrlar -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. REYTING -->
+                <section id="view_reyting" class="page-view hidden space-y-6 max-w-5xl mx-auto">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white font-heading">O'quvchilar Reytingi</h2>
+                        <p class="text-sm text-slate-500">Eng faol va yuqori ball to'plagan bilimdonlar jadvali</p>
+                    </div>
+
+                    <!-- Top 3 Podium -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6">
+                        <!-- 2-o'rin -->
+                        <div class="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm text-center flex flex-col justify-between order-2 sm:order-1 sm:translate-y-4">
+                            <div>
+                                <span class="w-10 h-10 rounded-full bg-slate-200 text-slate-800 font-black inline-flex items-center justify-center text-lg mb-2">2</span>
+                                <div class="text-4xl mb-2">👩‍🎓</div>
+                                <h4 class="font-bold text-slate-900 dark:text-white">Madina Karimova</h4>
+                                <p class="text-xs text-slate-500">Samarqand sh., 14-maktab</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800">
+                                <span class="text-lg font-extrabold text-blue-600">3 120 XP</span>
+                            </div>
+                        </div>
+
+                        <!-- 1-o'rin (Oltin) -->
+                        <div class="p-6 rounded-3xl bg-gradient-to-b from-amber-50 to-white dark:from-amber-950/30 dark:to-slate-900 border-2 border-amber-400 shadow-xl text-center flex flex-col justify-between order-1 sm:order-2">
+                            <div>
+                                <span class="w-12 h-12 rounded-full bg-amber-400 text-white font-black inline-flex items-center justify-center text-xl shadow-lg mb-2">
+                                    <i class="fa-solid fa-crown"></i>
+                                </span>
+                                <div class="text-5xl mb-2">👨‍🎓</div>
+                                <h4 class="text-lg font-extrabold text-slate-900 dark:text-white">Jasurbek Aliyev</h4>
+                                <p class="text-xs text-slate-500">Toshkent sh., 1-IDUM</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-amber-200/60 dark:border-slate-800">
+                                <span class="text-2xl font-black text-amber-600">3 450 XP</span>
+                                <p class="text-[10px] text-amber-500 font-bold uppercase tracking-wider mt-0.5">Hafta yetakchisi</p>
+                            </div>
+                        </div>
+
+                        <!-- 3-o'rin -->
+                        <div class="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm text-center flex flex-col justify-between order-3 sm:translate-y-6">
+                            <div>
+                                <span class="w-10 h-10 rounded-full bg-amber-700 text-white font-black inline-flex items-center justify-center text-lg mb-2">3</span>
+                                <div class="text-4xl mb-2">🧑‍💻</div>
+                                <h4 class="font-bold text-slate-900 dark:text-white">Behzod Rahimov</h4>
+                                <p class="text-xs text-slate-500">Buxoro, Qorako'l litseyi</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800">
+                                <span class="text-lg font-extrabold text-blue-600">2 980 XP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- To'liq ro'yxat -->
+                    <div class="space-y-3 pt-6">
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white">Umumiy reyting ro'yxati:</h4>
+                        <div id="leaderboardListContainer" class="space-y-3">
+                            <!-- Reyting ishtirokchilari -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. PROFIL -->
+                <section id="view_profil" class="page-view hidden space-y-6 max-w-5xl mx-auto">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white font-heading">Foydalanuvchi Profili</h2>
+                        <p class="text-sm text-slate-500">Shaxsiy ma'lumotlar, nishonlar va ta'lim sertifikati</p>
+                    </div>
+
+                    <!-- Asosiy Profil Kartasi -->
+                    <div class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                        <div id="profileAvatarDisplay" class="w-24 h-24 rounded-3xl bg-blue-100 dark:bg-blue-950 text-5xl flex items-center justify-center shrink-0 shadow-inner">
+                            👨‍🎓
+                        </div>
+                        <div class="flex-1 text-center sm:text-left space-y-2">
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                                <h3 id="profileDisplayName" class="text-2xl font-extrabold text-slate-900 dark:text-white">Azizbek Rahmonov</h3>
+                                <span id="profileLevelBadge" class="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300 self-center sm:self-auto">
+                                    3-daraja (Bilimdon)
+                                </span>
+                            </div>
+                            <p id="profileDisplaySchool" class="text-sm text-slate-500">Toshkent sh., 21-IDUM, 9-sinf</p>
+
+                            <!-- Daraja progressi -->
+                            <div class="pt-3 max-w-md">
+                                <div class="flex justify-between text-xs text-slate-400 font-semibold mb-1">
+                                    <span>Daraja darajasi:</span>
+                                    <span id="profileLevelInfoText">250 / 500 XP</span>
+                                </div>
+                                <div class="w-full bg-slate-100 dark:bg-slate-800 h-3 rounded-full overflow-hidden">
+                                    <div id="profileLevelProgressBar" class="bg-gradient-to-r from-blue-500 to-indigo-600 h-full rounded-full transition-all duration-500" style="width: 50%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sertifikat tugmasi -->
+                        <div class="shrink-0">
+                            <button onclick="BilimProfile.openCertificateModal()" class="px-5 py-3 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm shadow-md shadow-amber-500/20 transition flex items-center gap-2">
+                                <i class="fa-solid fa-certificate"></i>
+                                <span>Sertifikatni ko'rish</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Profilni Tahrirlash -->
+                    <div class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
+                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Ma'lumotlarni tahrirlash</h4>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-2">Ism va Familiya</label>
+                                <input id="inputProfileName" type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-2">Maktab yoki Litsey / Sinf</label>
+                                <input id="inputProfileSchool" type="text" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <!-- Avatar tanlash -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-2">Avatarni tanlang</label>
+                            <div id="avatarSelectorContainer" class="flex flex-wrap gap-2">
+                                <!-- Avatarlar -->
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-3">
+                            <span id="profileSaveAlert" class="hidden text-xs font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1.5 rounded-lg">
+                                <i class="fa-solid fa-circle-check"></i> Muvaffaqiyatli saqlandi!
+                            </span>
+                            <button onclick="BilimProfile.saveProfile()" class="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md shadow-blue-500/20 transition ml-auto">
+                                Saqlash
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Nishonlar va Yutuqlar (Badges) -->
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white">Qo'lga kiritilgan nishonlar</h4>
+                            <span class="text-xs text-slate-400">Faollik va bilim mukofotlari</span>
+                        </div>
+                        <div id="profileBadgesContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <!-- Badges -->
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- ==================== MODALLAR ==================== -->
+
+    <!-- 1. Darslik / Mavzu Modali -->
+    <div id="lessonModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 dark:border-slate-800 shadow-2xl relative" id="lessonModalContent">
+            <!-- Mavzu matni yuklanadi -->
+        </div>
+    </div>
+
+    <!-- 2. Masala Yechish Modali -->
+    <div id="problemModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full border border-slate-200 dark:border-slate-800 shadow-2xl relative" id="problemModalContent">
+            <!-- Masala formasi yuklanadi -->
+        </div>
+    </div>
+
+    <!-- 3. Sertifikat / Diplom Modali -->
+    <div id="certificateModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-3xl w-full p-6 sm:p-10 shadow-2xl text-slate-900 relative">
+            <button onclick="BilimProfile.closeCertificateModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 print:hidden">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Sertifikat ramkasi -->
+            <div class="certificate-frame p-6 sm:p-10 text-center rounded-2xl relative overflow-hidden">
+                <div class="text-xs font-bold text-amber-700 uppercase tracking-widest mb-1">O'zbekiston Respublikasi &bull; Bilim_Uz Ta'lim Portali</div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-amber-600 font-heading tracking-wide uppercase my-2">Muvaffaqiyat Sertifikati</h2>
+                <p class="text-xs text-slate-500 italic mb-6">Ushbu hujjat tasdiqlaydiki,</p>
+
+                <h3 id="certStudentName" class="text-2xl sm:text-3xl font-black text-slate-900 border-b-2 border-amber-500 pb-2 inline-block px-8 mb-2">
+                    Azizbek Rahmonov
+                </h3>
+                <p id="certStudentSchool" class="text-sm text-slate-600 font-medium mb-6">Toshkent sh., 21-IDUM, 9-sinf</p>
+
+                <p class="text-sm text-slate-700 max-w-lg mx-auto leading-relaxed mb-6">
+                    Platformada fanlar bo'yicha mustaqil ta'lim olib, yuqori faollik va chuqur bilim ko'rsatganligi uchun 
+                    <strong id="certLevelTitle" class="text-amber-700">3-daraja (Bilimdon)</strong> unvoni va maxsus 
+                    <strong id="certTotalXP" class="text-amber-700">1250 XP</strong> sertifikati bilan taqdirlanadi.
+                </p>
+
+                <div class="pt-6 border-t border-amber-300 flex items-center justify-between text-xs text-slate-600 mt-6">
+                    <div>
+                        <span class="block font-bold">Berilgan sana:</span>
+                        <span id="certDate">19-Oktyabr, 2026</span>
+                    </div>
+                    <div class="w-16 h-16 rounded-full border-2 border-amber-500 flex items-center justify-center text-amber-600 text-2xl">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                    <div>
+                        <span class="block font-bold">Muhr va Imzo:</span>
+                        <span class="font-serif italic font-bold text-blue-700">Bilim_Uz Kengashi</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tugmalar -->
+            <div class="flex justify-end gap-3 mt-6 print:hidden">
+                <button onclick="BilimProfile.closeCertificateModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-sm font-semibold">
+                    Yopish
+                </button>
+                <button onclick="BilimProfile.printCertificate()" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i>
+                    <span>Chop etish / PDF saqlash</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript fayllar -->
+    <script src="js/data.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/tests.js"></script>
+    <script src="js/problems.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/app.js"></script>
+
+    <script>
+        // Sahifa to'liq yuklangach ilovani ishga tushirish
+        document.addEventListener('DOMContentLoaded', () => {
+            window.BilimApp.init();
+        });
+    </script>
+</body>
+</html>
